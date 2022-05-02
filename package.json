@@ -1,0 +1,21 @@
+{
+  "name": "nodeqr",
+  "version": "1.0.0",
+  "description": "Genera codici QR.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "marck283/nodeQR"
+  },
+  "keywords": [
+    "nodeQR"
+  ],
+  "author": "Marco Lasagna",
+  "license": "MIT",
+  "dependencies": {
+    "qrcode": "^1.5.0"
+  }
+}

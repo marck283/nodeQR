@@ -3,6 +3,8 @@ const app = express();
 import { urlencoded, json } from "body-parser";
 import { toString, toDataURL } from "qrcode";
 import { writeFile } from 'fs';
+import "https"
+import { createServer } from "http";
 
 
 app.set("view engine", "ejs");
@@ -50,4 +52,8 @@ toDataURL(stringdata, function(err, qrcode) {
       console.log(err);
     }
   });
+});
+
+createServer(options, app).listen(3000, (req, res) => {
+  console.log("Server running on port 3000.");
 });

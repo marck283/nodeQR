@@ -1,17 +1,17 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const bp = require("body-parser");
-const qr = require("qrcode");
-const fs = require('fs');
+import { urlencoded, json } from "body-parser";
+import { toString, toDataURL } from "qrcode";
+import { writeFile } from 'fs';
 
 
 app.set("view engine", "ejs");
-app.use(bp.urlencoded({ extended: false }));
-app.use(bp.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 app.set("view engine", "ejs");
-app.use(bp.urlencoded({ extended: false }));
-app.use(bp.json());
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 app.get("/", (req, res) => {
     res.render("index");
@@ -37,7 +37,7 @@ const opts = {
 };
 
 //Print QR code to terminal (only used for testing purposes)
-qr.toString(stringdata, opts, function (err, qrcode) {
+toString(stringdata, opts, function (err, qrcode) {
   if(err) {
     return console.log("Error");
   }
@@ -45,11 +45,11 @@ qr.toString(stringdata, opts, function (err, qrcode) {
 });
 
 //Print QR code to file using base64 encoding
-qr.toDataURL(stringdata, function(err, qrcode) {
+toDataURL(stringdata, function(err, qrcode) {
   if(err) {
     return console.log("An error occurred.");
   }
-  fs.writeFile("./qrcode.json", JSON.stringify(qrcode), err => {
+  writeFile("./qrcode.json", JSON.stringify(qrcode), err => {
     if(err) {
       console.log(err);
     }

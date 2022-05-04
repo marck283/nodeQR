@@ -9,10 +9,6 @@ app.set("view engine", "ejs");
 app.use(urlencoded({ extended: false }));
 app.use(json());
 
-app.set("view engine", "ejs");
-app.use(urlencoded({ extended: false }));
-app.use(json());
-
 app.get("/", (req, res) => {
     res.render("index");
 });

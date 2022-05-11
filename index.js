@@ -1,15 +1,13 @@
-import express from "express";
+var express = require('express');
 const app = express();
-import { urlencoded, json } from "body-parser";
-import { toString, toDataURL } from "qrcode";
-import { writeFile } from 'fs';
-import "https"
-import { createServer } from "http";
+var qrcode = require('qrcode');
+var fs = require('fs');
+var https = require('https');
 
 
 app.set("view engine", "ejs");
-app.use(urlencoded({ extended: false }));
-app.use(json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.render("index");
@@ -35,7 +33,7 @@ const opts = {
 };
 
 //Print QR code to terminal (only used for testing purposes)
-toString(stringdata, opts, function (err, qrcode) {
+qrcode.toString(stringdata, opts, function (err, qrcode) {
   if(err) {
     return console.log("Error");
   }
@@ -43,17 +41,17 @@ toString(stringdata, opts, function (err, qrcode) {
 });
 
 //Print QR code to file using base64 encoding
-toDataURL(stringdata, function(err, qrcode) {
+qrcode.toDataURL(stringdata, function(err, qrcode) {
   if(err) {
     return console.log("An error occurred.");
   }
-  writeFile("./qrcode.json", JSON.stringify(qrcode), err => {
+  fs.writeFile("./qrcode.json", JSON.stringify(qrcode), err => {
     if(err) {
       console.log(err);
     }
   });
 });
 
-createServer(options, app).listen(3000, (req, res) => {
+https.createServer(options, app).listen(3000, (req, res) => {
   console.log("Server running on port 3000.");
 });

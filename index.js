@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+//Dati di esempio
 let data = {
   name: "Marco",
   surname: "Lasagna",
